@@ -8,7 +8,8 @@ public class TestBase {
     @BeforeAll
     static void beforeAll() {
         Configuration.pageLoadStrategy = "eager";
-        Configuration.browserSize="1920x1080";;
+        Configuration.browserSize = "1920x1080";
+        Configuration.baseUrl = "https://github.com";
     }
 
     @AfterEach

@@ -10,19 +10,19 @@ import static io.qameta.allure.Allure.step;
 import static org.openqa.selenium.By.linkText;
 
 public class SearchIssueTests extends TestBase{
-    private static final String repository = "eroshenkoam/allure-example";
-    private static final int issueNumber = 87;
-    private static final String issueTitle = "Issue for HW qa.guru";
+    private static final String REPOSITORY = "eroshenkoam/allure-example";
+    private static final int NUMBER = 87;
+    private static final String TITLE = "Issue for HW qa.guru";
 
     @Test
     public void searchIssueTest() {
         SelenideLogger.addListener("allure", new AllureSelenide());
-        open("https://github.com");
+        open("");
         $(".search-input").click();
-        $("#query-builder-test").setValue(repository).pressEnter();
-        $(linkText(repository)).click();
+        $("#query-builder-test").setValue(REPOSITORY).pressEnter();
+        $(linkText(REPOSITORY)).click();
         $("#issues-tab").click();
-        $("#issue_"+issueNumber+"_link").should(Condition.exist).shouldHave(text(issueTitle));
+        $("#issue_"+ NUMBER +"_link").should(Condition.exist).shouldHave(text(TITLE));
     }
 
     @Test
@@ -30,20 +30,20 @@ public class SearchIssueTests extends TestBase{
     {
         SelenideLogger.addListener("allure", new AllureSelenide());
         step("Открываем главную страницу", () -> {
-            open("https://github.com");
+            open("");
         });
-        step("Ищем репозиторий" + repository, () -> {
+        step("Ищем репозиторий" + REPOSITORY, () -> {
             $(".search-input").click();
-            $("#query-builder-test").setValue(repository).pressEnter();
+            $("#query-builder-test").setValue(REPOSITORY).pressEnter();
         });
-        step("Переходим в репозиторий" + repository, () -> {
-            $(linkText(repository)).click();
+        step("Переходим в репозиторий" + REPOSITORY, () -> {
+            $(linkText(REPOSITORY)).click();
         });
         step("Переходим на вкладку Issues", () -> {
             $("#issues-tab").click();
         });
-        step("Проверяем наличие Issue с номером " + issueNumber + " и названием " + issueTitle, () -> {
-            $("#issue_"+issueNumber+"_link").should(Condition.exist).shouldHave(text(issueTitle));
+        step("Проверяем наличие Issue с номером " + NUMBER + " и названием " + TITLE, () -> {
+            $("#issue_"+ NUMBER +"_link").should(Condition.exist).shouldHave(text(TITLE));
         });
     }
 
@@ -52,10 +52,10 @@ public class SearchIssueTests extends TestBase{
         SelenideLogger.addListener("allure", new AllureSelenide());
         TestSteps steps = new TestSteps();
         steps.openMainPage();
-        steps.searchForRepository(repository);
-        steps.clickOnRepositoryLink(repository);
+        steps.searchForRepository(REPOSITORY);
+        steps.clickOnRepositoryLink(REPOSITORY);
         steps.openIssuesTab();
-        steps.shouldSeeIssueWithNumberAndTitle(issueNumber, issueTitle);
+        steps.shouldSeeIssueWithNumberAndTitle(NUMBER, TITLE);
     }
 
 }
